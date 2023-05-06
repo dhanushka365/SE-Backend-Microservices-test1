@@ -58,4 +58,8 @@ public class CourseService {
         return courseRepository.findAll(pageable);
     }
 
+    public Course findById(Long id) {
+        return courseRepository.findById(Math.toIntExact(id))
+                .orElseThrow(() -> new IllegalArgumentException("Course with ID " + id + " does not exist"));
+    }
 }

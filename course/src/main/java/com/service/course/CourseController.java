@@ -26,6 +26,12 @@ public class CourseController {
         return courseService.getCourses(PageRequest.of(page, size));
     }
 
+    @GetMapping("/view/{courseId}")
+    public Course findById(@PathVariable Long id) {
+
+        return courseService.findById(id);
+    }
+
     @DeleteMapping("/delete/{courseId}")
     public void deleteCourse(@PathVariable Integer courseId){
         courseService.deleteCourse(courseId);
