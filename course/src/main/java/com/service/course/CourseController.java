@@ -27,9 +27,9 @@ public class CourseController {
     }
 
     @GetMapping("/view/{courseId}")
-    public Course findById(@PathVariable Long id) {
+    public Course findById(@PathVariable Integer courseId) {
 
-        return courseService.findById(id);
+        return courseService.findCourseById(courseId);
     }
 
     @DeleteMapping("/delete/{courseId}")
