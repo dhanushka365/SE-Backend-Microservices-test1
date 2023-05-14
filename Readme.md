@@ -4,7 +4,10 @@
 
 #docker compose -d up
 # see the docker logs
-# docker logs zipkin
+
+# docker logs zipkin!
+[API ENDPOINTS](https://github.com/dhanushka365/SE-Backend-Microservices-test1/assets/66137046/df1103bd-3f26-4517-8b54-e0429e6e59ea)
+
 * ##### Jar files created without any errors and using following commands we can execute them.Please execute those command in the root directory.
 1. [x] java -jar student/target/student-0.0.1-SNAPSHOT.jar
 2. [x] java -jar eureka-server/target/eureka-server-0.0.1-SNAPSHOT.jar
