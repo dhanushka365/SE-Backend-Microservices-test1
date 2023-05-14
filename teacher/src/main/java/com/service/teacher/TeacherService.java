@@ -3,9 +3,12 @@ package com.service.teacher;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-
+import java.util.Collections;
 import java.util.Optional;
 
 @Service
@@ -20,6 +23,8 @@ public class TeacherService {
                 .lastName(request.lastName())
                 .email(request.email())
                 .department(request.department())
+                .roles(request.roles())
+                .password(request.password())
                 .build();
         //todo: check if email valid
         //todo: check if email not taken
@@ -57,12 +62,31 @@ public class TeacherService {
         if (request.department() != null) {
             teacher.setDepartment(request.department());
         }
-
+        if (request.roles() != null) {
+            teacher.setRoles(request.roles());
+        }
+        if (request.password() != null) {
+            teacher.setPassword(request.password());
+        }
         teacherRepository.save(teacher);
     }
 
     public Page<Teacher> getTeachers(Pageable pageable) {
         return teacherRepository.findAll(pageable);
+    }
+
+
+    public UserDetails findTeacherByEmail(String email) {
+        Teacher user = teacherRepository.findByEmail(email);
+        if (user == null) {
+            throw new UsernameNotFoundException("No user was found");
+        }
+
+        return new org.springframework.security.core.userdetails.User(
+                user.getEmail(),
+                user.getPassword(),
+                Collections.singleton(new SimpleGrantedAuthority(user.getRoles()))
+        );
     }
 
     }
