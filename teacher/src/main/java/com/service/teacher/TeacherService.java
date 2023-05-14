@@ -1,12 +1,11 @@
 package com.service.teacher;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Collections;
 import java.util.Optional;
@@ -76,17 +75,11 @@ public class TeacherService {
     }
 
 
-    public UserDetails findTeacherByEmail(String email) {
-        Teacher user = teacherRepository.findByEmail(email);
-        if (user == null) {
-            throw new UsernameNotFoundException("No user was found");
-        }
-
-        return new org.springframework.security.core.userdetails.User(
-                user.getEmail(),
-                user.getPassword(),
-                Collections.singleton(new SimpleGrantedAuthority(user.getRoles()))
-        );
+    public Teacher findTeacherByEmail(String email) {
+        return teacherRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("No teacher was found"));
     }
+
+
 
     }
