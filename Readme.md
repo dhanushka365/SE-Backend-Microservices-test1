@@ -3,7 +3,9 @@
 
 
 #docker compose -d up
-# see the docker logs
+# Mid Evaluation Presentation
+[School Management System.pdf](https://github.com/dhanushka365/SE-Backend-Microservices-test1/files/12435947/School.Management.System.pdf)
+
 
 # docker logs zipkin!
 [API ENDPOINTS](https://github.com/dhanushka365/SE-Backend-Microservices-test1/assets/66137046/df1103bd-3f26-4517-8b54-e0429e6e59ea)
